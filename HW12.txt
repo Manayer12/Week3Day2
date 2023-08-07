@@ -1,0 +1,61 @@
+code 1
+
+Bean is used , so it will call the method automatically,
+the output will be:
+hey
+
+----------
+
+code 2
+
+the first method (getMessage 1) will called first because it is qualifier is 1,depending on the parametr (qualifier)in the method (getMessage 2),the output will be
+hey from message 1
+hey from message 2
+
+----------
+
+code 3
+1.the spring context is not go in an orderly way, and that causing diffrent outputs,the output bellow is result of the spring context starting by methods (message1) then (message 2) but message2 have parameter (qualifier (3)) , which assigned as a key to the methods (message3) this method will be executed before method (messge2), then (messge2) will be executed. 
+
+2.Second possibility,it could start by(message1),then(message3),then(message2),this method contain parameter (Qualifier(3)) and because message it has been executed before, (message2) will be executed
+
+3.Third possibility, there are different outputs, but I will mention this last output in this example. It could start with (message2) because it contains parameter (Qualifier(3)), and (message3) contains qualifier(3).(message3) is then executed, followed by (message2), and lastly (message1).
+
+
+the output 
+hey from message1
+hey from message3
+hey from message2
+
+----------
+
+code 4
+1.It is possible for the program to have different outputs and different starts,
+Let's assume the program starts with the MainController method, which has Qualifier(1) assigned as the key for (message1), so we have to go to method (message1) to process it, then go back to the MainController method to process it, second randomly (message2) to process it.but it will be checked and it has qualifier(3) as parametr which is assigned to (message3) as it is key, message 3 method will be exeuted then it will turn back to (message 2) to process it 
+
+
+the output
+hey from message1
+hey from Main controller
+hey from message3
+hey from message2
+
+----------
+code 5
+
+1.It is possible for the program to have different outputs and different starts,Let's assume the program starts with second method(message2) it has qualifier(3) as parametr which is assigned to (message3) as it is key,(message3) method will be exeuted then it will turn back to (message 2) to process it.Next the maincontroller will be exeuted because it has qualifier(2) as parametr,which mean (message2)should be completed before the (Maincontroller statment),in the last (Message1) will be exuted.
+
+2.the program has the posibility to start from message1,then message2 and becuse it has qualifier(3) as parametr which is assigned to (message3) as it is key,(message3) method will be exeuted then it will turn back to (message 2) to process it,and the last will be the maincontroller because it has qualifier(2) as parametr,which mean (message2)should be completed before the (Maincontroller statment)
+
+the output
+hey from message3
+hey from message2
+hey from the controller
+hey from message1
+
+
+
+
+
+
+
